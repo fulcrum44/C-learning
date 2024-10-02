@@ -22,4 +22,6 @@ int main() {
         letra_aleatoria='A'+rand()%26;
         printf("%c", letra_aleatoria);
     }
+
+    return 0;
 }
