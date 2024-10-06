@@ -31,7 +31,7 @@ int main (void) {
     int acumulado_ronda; // Acumularemos los puntos de los dados lanzados en una ronda.
     int pts_jugador=0; // Guardaremos y sumaremos los puntos acumulados de cada ronda de la partida.
     int pts_banca=0;
-    char opcion_plantarse;
+    char eleccion_plantarse;
 
     printf(SELECCION_DADOS);
     scanf("%d", &dados);
@@ -95,10 +95,10 @@ int main (void) {
 
         if (jugador_plantado==0) {
             printf(PLANTARSE);
-            scanf("%c", &opcion_plantarse);
+            scanf("%c", &eleccion_plantarse);
             while(getchar()!='\n');
 
-            if (opcion_plantarse == 'P' || opcion_plantarse == 'p') jugador_plantado=1;
+            if (eleccion_plantarse == 'P' || eleccion_plantarse == 'p') jugador_plantado=1;
         }
 
         if (jugador_plantado == 1 && banca_plantada == 1) break;
