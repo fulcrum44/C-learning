@@ -1,0 +1,10 @@
+1. Pedir que usuario inserte un importe de dinero.
+	- El importe introducido debe ser mínimo 5 centimos y máximo 5 euros. (PRIMERO VAMOS A SUPONER QUE EL IMPORTE INTRODUCIDO SIEMPRE VA A ESTAR EN CÉNTIMOS)
+	- El importe mínimo son 5 céntimos a la vez que la moneda más pequeña permitida es la de 5 cents. Por esto, los importes permitidos solamente serán aquellos que sean divisibles entre 5.
+
+2. Enseñar menú de productos al jugador.
+3. Se pide al usuario que producto quiere.
+	- Se comprueba que el dígito insertado corresponde con una de las opciones disponibles.
+	- Si se ha seleccionado una opción correcta, se comprueba si el importe de dinero introducido es suficiente para elegir dicha opción.
+		- En caso de ser suficiente, se calcula si debemos devolver cambio al usuario o no. EL cambio se calcula teniendo en cuenta la divisibilidad de 5 de todas las monedas.
+		- Si no es suficiente, de momento, mostraremos un mensaje correspondiente al usuario y volveremos a inicio.
