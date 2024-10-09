@@ -46,64 +46,14 @@ int tropas_humano;//las tropas que tienen en cada momento los jugadores
 int tropas_cpu;
 int reposicion=2;//la cantidad que puede reponer el humano cuando decida no atacar (configurable)
 
-
 int main(void) {
   srand(time(NULL)); // Definimos la semilla para poder generar números aleatorios a lo largo de nuestro programa.
 
   int opcion;
   
   do {
-    selecciona_opcion();
-  } while(1);
-  
-  return 0;
-}
+    opcion=selecciona_opcion();
 
-void configurar_tropas() {
-  tropas=0;
-
-  while (tropas < TROPAS_MINIMAS) {
-    printf(MENSAJE_CONFIGURACION_TROPAS, TROPAS_MINIMAS);
-    scanf("%d", &tropas);
-    while(getchar()!='\n');
-  }
-
-  return 0;
-}
-
-void configurar_reposicion() {
-  reposicion=0;
-
-  while (reposicion < REPOSICION_MINIMA) {
-    printf(MENSAJE_CONFIGURACION_REPOSICION, REPOSICION_MINIMA);
-    scanf("%d", &reposicion);
-    while(getchar()!='\n');
-  }
-
-  return 0;
-
-}
-
-void ver_puntuaciones() {
-  printf(MENSAJE_PUNTUACIONES_TOTALES, puntos_humano, puntos_cpu);
-
-  return 0;
-}
-
-int selecciona_opcion() {
-  int opcion=0;
-
-  printf(MENU_CABECERA);
-  printf(MENU_OPCION_1);
-  printf(MENU_OPCION_2);
-  printf(MENU_OPCION_3);
-  printf(MENU_OPCION_4);
-  printf(MENU_OPCION_5);
-
-  scanf("%d", &opcion);
-  while(getchar()!='\n');
-
-  while (opcion < 1 || opcion > 5) {
     switch (opcion) {
       case 1:
         configurar_tropas();
@@ -120,13 +70,50 @@ int selecciona_opcion() {
       case 5:
         printf(DESPEDIDA);
         break;
-      default:
-        printf(MENU_ERROR_OPCION);
-        break; 
     }
+  } while(opcion != 5);
+
+  return 0;
+}
+
+int selecciona_opcion() {
+  int opcion=0;
+
+  while (opcion < 1 || opcion > 5) {
+    printf(MENU_CABECERA);
+    printf(MENU_OPCION_1);
+    printf(MENU_OPCION_2);
+    printf(MENU_OPCION_3);
+    printf(MENU_OPCION_4);
+    printf(MENU_OPCION_5);
+
+    scanf("%d", &opcion);
+    while(getchar()!='\n');
+
+    if (opcion < 1 || opcion > 5) printf(MENU_ERROR_OPCION);
   }
 
   return opcion;
+}
+
+void configurar_tropas() {
+  do {
+    printf(MENSAJE_CONFIGURACION_TROPAS, TROPAS_MINIMAS);
+    scanf("%d", &tropas);
+    while(getchar()!='\n');
+  } while (tropas < TROPAS_MINIMAS);
+}
+
+void configurar_reposicion() {
+  do {
+    printf(MENSAJE_CONFIGURACION_REPOSICION, REPOSICION_MINIMA);
+    scanf("%d", &reposicion);
+    while(getchar()!='\n');
+  } while (reposicion < REPOSICION_MINIMA);
+}
+
+void ver_puntuaciones() {
+  printf(MENSAJE_PUNTUACIONES_TOTALES, puntos_humano, puntos_cpu);
 }
 
 int tirada() {
@@ -157,8 +144,17 @@ void jugar(){
       }while(eleccion!='a' && eleccion!='r');
       if(eleccion=='r'){
         //// EJERCICIO 9////
-        tropas_humano+=reposicion;
-        printf(MENSAJE_REPOSICION_EJECUTADA);
+        // unidades_repuestas=rand()%2;
+        // if (unidades_repuestas == 0) {
+        //   printf(MENSAJE_REPOSICION_EJECUTADA, unidades_repuestas);
+        // } else {
+        //   unidades_repuestas=reposicion;
+        //   tropas_humano+=unidades_repuestas;
+        //   printf(MENSAJE_REPOSICION_EJECUTADA, unidades_repuestas);
+        // }
+        unidades_repuestas=reposicion*(rand()%2); // Método simplificado
+        tropas_humano+=unidades_repuestas;
+        printf(MENSAJE_REPOSICION_EJECUTADA, unidades_repuestas);
       }else{
         //// EJERCICIO 10////
         enfrentamiento(1);
@@ -174,10 +170,15 @@ void jugar(){
   }while(tropas_humano > 0 && tropas_cpu > 0);//// EJERCICIO 7////
   //Mensaje de victoria
   printf(MENSAJE_TROPAS,tropas_humano,tropas_cpu);
-  //// EJERCICIO 11////
-  printf((tropas_humano = tropas_cpu)? VICTORIA_NULA : (tropas_humano > tropas_cpu) ?  VICTORIA_HUMANO : VICTORIA_CPU);
+  //// EJERCICIO 11////  
+  if (tropas_humano > tropas_cpu) {
+    puntos_humano+=1;
+    printf(VICTORIA_HUMANO);
+  } else if (tropas_cpu > tropas_humano) {
+    puntos_cpu+=1;
+    printf(VICTORIA_CPU);
+  } else printf(VICTORIA_NULA);
 }
-
 
 void enfrentamiento(int turno){
   int dado;//tirada para luego guardarla en a1, a2, a3, d1, d2
@@ -234,5 +235,3 @@ void enfrentamiento(int turno){
   if(tropas_cpu<0) tropas_cpu=0;
   if(tropas_humano<0) tropas_humano=0;
 }
-
- 
