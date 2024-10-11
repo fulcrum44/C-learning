@@ -3,27 +3,22 @@
 #include <time.h>
 
 int solicitud_numero_preguntas();
-void test(int);
+float test(int);
 int generador_preguntas();
 int generador_operando();
-void resultados();
+void resultados(float);
 
 int cantidad_preguntas=0; // Inicializamos la variable con el valor 0 para que pueda ejecutarse el bucle por primera vez.
-int respuesta;
 int aciertos=0;
 int fallos=0;
-float puntos=0;
-
 
 int main() {
     srand(time(NULL));
 
-    test(solicitud_numero_preguntas());
-    resultados();
+    resultados(test(solicitud_numero_preguntas()));
 
     return 0;
 }
-
 
 int solicitud_numero_preguntas() {
     char* const NUMERO_PREGUNTAS="Dime cuántas preguntas quieres responder: ";
@@ -37,11 +32,13 @@ int solicitud_numero_preguntas() {
     return cantidad_preguntas;
 }
 
-void test(int cantidad_preguntas) {
+float test(int cantidad_preguntas) {
     char* const RESPUESTA_CORRECTA="!Bien!\n";
     char* const RESPUESTA_INCORRECTA="!Mal! (%d)\n";
 
     int resultado;
+    int respuesta;
+    float puntos=0;
 
     for (int i=1; i<=cantidad_preguntas; i++) {
         printf("\n%d - ", i);
@@ -65,7 +62,7 @@ void test(int cantidad_preguntas) {
         }
         while(getchar()!='\n');
     }
-
+    return puntos;
 }
 
 int  generador_preguntas() {
@@ -115,7 +112,7 @@ int generador_operando() {
     return operando;
 }
 
-void resultados() {
+void resultados(float puntos) {
     char* const ACIERTOS="\nAciertos: %d --> %.2f puntos";
     char* const FALLOS="\nFallos: %d --> %.2f puntos";
     char* const PUNTUACION="\nPuntuación: %.2f/%.2f --> ";
