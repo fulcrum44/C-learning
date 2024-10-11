@@ -1,0 +1,29 @@
+Necesitamos un programa que pueda formular las preguntas de un examen de aritmética básica para los alumnos de tercer curso de primaria.
+El programa deberá generar una cierta cantidad de preguntas a decidir por el alumno. Cada una de ellas podrá ser la suma, resta o multiplicación de dos números entre 0 y 10 (incluidos). Tanto la operación como los números se elegirán al azar en cada pregunta.
+Los alumnos de ese nivel todavía no conocen el concepto de número negativo. Así que si la pregunta es una resta nos debemos asegurar de que el primer operando sea mayor o igual que el segundo. Es decir: se le puede preguntar cuánto es 4-1, pero no cuánto es 1-4.
+
+El programa debe autocorregir el examen.
+El comportamiento y aspecto de la ejecución del programa se muestran en la imagen adjunta. Básicamente, es el siguiente:
+- Solicita al alumno que indique de cuántas preguntas se compone el test (obliga a que la respuesta sea un número estrictamente positivo).
+- Realiza cada pregunta (si la respuesta no es un número vuelve a preguntar) e informa al alumno de si la ha contestado bien o no y, en tal caso, cuál era la respuesta correcta.
+- Al terminar las preguntas, muestra el nº de aciertos y de errores y la puntuación obtenida: cada acierto suma un punto y cada error resta medio punto. Si la puntuación supera la mitad de las preguntas -> APTO. En caso contrario 	NO APTO.
+
+PUNTUACIONES:
+Solicitar nº preguntas -> 2.5 puntos
+Ejecutar el test -> 5 puntos
+Presentar resultados -> 2.5 puntos
+
+IMPORTANTE: 
+Para conseguir puntuación plena en cada parte del programa, se valorará, además del funcionamiento,
+- Descomposición del código en funciones de acuerdo a las tareas a realizar
+- Adecuada indentación del código.
+- Uso adecuado de variables y constantes en cuanto a tipo, cantidad y alcance (local/global)
+- Adecuada cantidad de comentarios y que estos sean significativos.
+- No realizar más operaciones de las necesarias.
+- Nada de buscar código por internet y pegarlo a ver si funciona.
+Es obligatorio usar correctamente:
+- Alguna estructura condicional if / if-else / if-else-if
+- Alguna estructura condicional switch
+- Algún bucle. Si se usa más de uno, han de ser de diferente tipo.
+- El operador condicional ternario
+
