@@ -2,25 +2,25 @@
 #include <stdlib.h>
 #include <time.h>
 
-int solicitud_numero_preguntas();
+int solicitud_numero_preguntas(int);
 float test(int);
 int generador_preguntas();
 int generador_operando();
 void resultados(float);
 
-int cantidad_preguntas=0; // Inicializamos la variable con el valor 0 para que pueda ejecutarse el bucle por primera vez.
+; // Inicializamos la variable con el valor 0 para que pueda ejecutarse el bucle por primera vez.
 int aciertos=0;
 int fallos=0;
 
 int main() {
     srand(time(NULL));
 
-    resultados(test(solicitud_numero_preguntas()));
+    resultados(test(solicitud_numero_preguntas(0)));
 
     return 0;
 }
 
-int solicitud_numero_preguntas() {
+int solicitud_numero_preguntas(int cantidad_preguntas) {
     char* const NUMERO_PREGUNTAS="Dime cuántas preguntas quieres responder: ";
 
     do {
@@ -72,18 +72,16 @@ int  generador_preguntas() {
     int resultado;
  
     operacion=rand()%3;
+    primer_valor=generador_operando();
+    segundo_valor=generador_operando();
 
     switch (operacion){
         case 0:
-            primer_valor=generador_operando();
-            segundo_valor=generador_operando();
             printf("¿ %d + %d ? ", primer_valor, segundo_valor);
             resultado=primer_valor+segundo_valor;
             break;
         
         case 1:
-            primer_valor=generador_operando();
-            segundo_valor=generador_operando();
             if (primer_valor > segundo_valor) {
                 printf("¿ %d - %d ? ", primer_valor, segundo_valor);
                 resultado=primer_valor-segundo_valor;
@@ -95,8 +93,6 @@ int  generador_preguntas() {
             break;
 
         case 2:
-            primer_valor=generador_operando();
-            segundo_valor=generador_operando();
             printf("¿ %d * %d ? ", primer_valor, segundo_valor);
             resultado=primer_valor*segundo_valor;
             break;
@@ -106,10 +102,10 @@ int  generador_preguntas() {
 }
 
 int generador_operando() {
-    int operando;
-    operando=rand()%11; //Generamos un valor entre 0 y 10
+    int operador;
+    operador=rand()%11; //Generamos un valor entre 0 y 10
 
-    return operando;
+    return operador;
 }
 
 void resultados(float puntos) {
@@ -117,7 +113,7 @@ void resultados(float puntos) {
     char* const FALLOS="\nFallos: %d --> %.2f puntos";
     char* const PUNTUACION="\nPuntuación: %.2f/%.2f --> ";
 
-    float puntuacion_maxima=cantidad_preguntas;
+    float puntuacion_maxima=aciertos+fallos;
 
     printf(ACIERTOS, aciertos, aciertos * 1.0);
     printf(FALLOS, fallos, fallos * -0.5);
