@@ -8,14 +8,14 @@ int generador_preguntas();
 int generador_operando();
 void resultados(float);
 
-; // Inicializamos la variable con el valor 0 para que pueda ejecutarse el bucle por primera vez.
+
 int aciertos=0;
 int fallos=0;
 
 int main() {
     srand(time(NULL));
 
-    resultados(test(solicitud_numero_preguntas(0)));
+    resultados(test(solicitud_numero_preguntas(0))); ; // Inicializamos la variable de la función con el valor 0 para que pueda ejecutarse el bucle por primera vez.
 
     return 0;
 }
